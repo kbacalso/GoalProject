@@ -11,6 +11,11 @@
 
 static NSString* const cellIdentifier = @"ExpenseTypeCell";
 
+enum ETExpenseTypeAlertView {
+    ETExpenseTypeAlertViewAdd,
+    ETExpenseTypeAlertViewEdit,
+};
+
 @interface ETExpenseTypeTableViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray* expenseTypes;
@@ -29,6 +34,7 @@ static NSString* const cellIdentifier = @"ExpenseTypeCell";
                                                  cancelButtonTitle:@"Cancel"
                                                  otherButtonTitles:@"Add",nil];
     addAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    addAlertView.tag = ETExpenseTypeAlertViewAdd;
     [addAlertView show];
 }
 
@@ -79,18 +85,44 @@ static NSString* const cellIdentifier = @"ExpenseTypeCell";
 //}
 
 
+#pragma mark - Table View Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ETExpenseType* expenseType = self.expenseTypes[indexPath.row];
+    
+    UIAlertView* editAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Category"
+                                                           message:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                                 otherButtonTitles:@"Edit",nil];
+    editAlertView.tag = ETExpenseTypeAlertViewEdit;
+    editAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [[editAlertView textFieldAtIndex:0] setText:expenseType.name];
+    [editAlertView show];
+}
+
 #pragma mark - Alert View Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1) {
-        NSString* newTypeName = [[alertView textFieldAtIndex:0] text];
-        ETExpenseType* newType = [[ETStore sharedStore] createExpenseType:newTypeName];
-        [self.expenseTypes addObject:newType];
-        NSIndexPath* newRowIndexPath = [NSIndexPath indexPathForRow:([self.expenseTypes count] - 1) inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[newRowIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSString* newTypeName = [[alertView textFieldAtIndex:0] text];
+    if (alertView.tag == ETExpenseTypeAlertViewAdd) {
+        if (buttonIndex == 1) {
+            ETExpenseType* newType = [[ETStore sharedStore] createExpenseType:newTypeName];
+            [self.expenseTypes addObject:newType];
+            NSIndexPath* newRowIndexPath = [NSIndexPath indexPathForRow:([self.expenseTypes count] - 1) inSection:0];
+            [self.tableView insertRowsAtIndexPaths:@[newRowIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        return;
     }
-    NSLog(@"The (%d)%@ button was tapped.", buttonIndex, [alertView buttonTitleAtIndex:buttonIndex]);
+    
+    if (buttonIndex == 1) {
+        NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        ETExpenseType* newType = self.expenseTypes[selectedIndexPath.row];
+        newType.name = newTypeName;
+        [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 @end
