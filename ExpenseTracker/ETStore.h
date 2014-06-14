@@ -1,13 +1,15 @@
 //
-//  ViewController.h
+//  ETExpenseStore.h
 //  ExpenseTracker
 //
 //  Created by Taki Bacalso on 6/14/14.
 //  Copyright (c) 2014 KlabCyscorpions. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface ViewController : UIViewController
+@interface ETStore : NSObject
+
++ (instancetype)sharedStore;
 
 @end
