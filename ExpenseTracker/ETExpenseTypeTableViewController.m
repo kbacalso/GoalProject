@@ -8,6 +8,7 @@
 
 #import "ETExpenseTypeTableViewController.h"
 #import "ETExpenseType.h"
+#import "UIAlertView+Util.h"
 
 static NSString* const cellIdentifier = @"ExpenseTypeCell";
 
@@ -28,12 +29,10 @@ enum ETExpenseTypeAlertView {
 
 - (IBAction)addNewItem:(id)sender
 {
-    UIAlertView* addAlertView = [[UIAlertView alloc] initWithTitle:@"New Category"
-                                                           message:nil
-                                                          delegate:self
-                                                 cancelButtonTitle:@"Cancel"
-                                                 otherButtonTitles:@"Add",nil];
-    addAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UIAlertView* addAlertView = [UIAlertView alertViewInputWithTitle:@"New Category"
+                                                            delegate:self
+                                                   commitButtonTitle:@"Add"
+                                                         defaultText:nil];
     addAlertView.tag = ETExpenseTypeAlertViewAdd;
     [addAlertView show];
 }
@@ -44,6 +43,7 @@ enum ETExpenseTypeAlertView {
 - (void)viewWillAppear:(BOOL)animated
 {
     self.expenseTypes = [[[ETStore sharedStore] allExpenseTypes] mutableCopy];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -90,15 +90,11 @@ enum ETExpenseTypeAlertView {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ETExpenseType* expenseType = self.expenseTypes[indexPath.row];
-    
-    UIAlertView* editAlertView = [[UIAlertView alloc] initWithTitle:@"Edit Category"
-                                                           message:nil
-                                                          delegate:self
-                                                 cancelButtonTitle:@"Cancel"
-                                                 otherButtonTitles:@"Edit",nil];
+    UIAlertView* editAlertView = [UIAlertView alertViewInputWithTitle:@"Edit Category"
+                                                             delegate:self
+                                                    commitButtonTitle:@"Edit"
+                                                          defaultText:expenseType.name];
     editAlertView.tag = ETExpenseTypeAlertViewEdit;
-    editAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [[editAlertView textFieldAtIndex:0] setText:expenseType.name];
     [editAlertView show];
 }
 

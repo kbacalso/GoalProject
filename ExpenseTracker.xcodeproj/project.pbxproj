@@ -11,6 +11,7 @@
 		6085C722194C13E400F6E6C2 /* ETExpenseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C721194C13E400F6E6C2 /* ETExpenseItem.m */; };
 		6085C725194C194B00F6E6C2 /* NSManagedObjectContext+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C724194C194B00F6E6C2 /* NSManagedObjectContext+Util.m */; };
 		6085C72A194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C729194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m */; };
+		6085C72D194C464400F6E6C2 /* UIAlertView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C72C194C464400F6E6C2 /* UIAlertView+Util.m */; };
 		60BE957F194BF59D0005E1D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60BE957E194BF59D0005E1D8 /* CoreData.framework */; };
 		60D288B6194BD9E300A8A300 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D288B5194BD9E300A8A300 /* Foundation.framework */; };
 		60D288B8194BD9E300A8A300 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D288B7194BD9E300A8A300 /* CoreGraphics.framework */; };
@@ -49,6 +50,8 @@
 		6085C724194C194B00F6E6C2 /* NSManagedObjectContext+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Util.m"; sourceTree = "<group>"; };
 		6085C728194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseTypeTableViewController.h; sourceTree = "<group>"; };
 		6085C729194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseTypeTableViewController.m; sourceTree = "<group>"; };
+		6085C72B194C464400F6E6C2 /* UIAlertView+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Util.h"; sourceTree = "<group>"; };
+		6085C72C194C464400F6E6C2 /* UIAlertView+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Util.m"; sourceTree = "<group>"; };
 		60BE957E194BF59D0005E1D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		60D288B2194BD9E300A8A300 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D288B5194BD9E300A8A300 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,6 +215,8 @@
 				60D288F1194BDD3F00A8A300 /* NSDate+Util.m */,
 				6085C723194C194B00F6E6C2 /* NSManagedObjectContext+Util.h */,
 				6085C724194C194B00F6E6C2 /* NSManagedObjectContext+Util.m */,
+				6085C72B194C464400F6E6C2 /* UIAlertView+Util.h */,
+				6085C72C194C464400F6E6C2 /* UIAlertView+Util.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				6085C722194C13E400F6E6C2 /* ETExpenseItem.m in Sources */,
 				6085C71F194C13E300F6E6C2 /* ETExpenseType.m in Sources */,
 				6085C72A194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m in Sources */,
+				6085C72D194C464400F6E6C2 /* UIAlertView+Util.m in Sources */,
 				60D288F8194BED2000A8A300 /* ETStore.m in Sources */,
 				6085C725194C194B00F6E6C2 /* NSManagedObjectContext+Util.m in Sources */,
 				60D288C6194BD9E300A8A300 /* AppDelegate.m in Sources */,
