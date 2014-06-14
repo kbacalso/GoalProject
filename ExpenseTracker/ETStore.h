@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class ETExpenseType;
+
 @interface ETStore : NSObject
 
-+ (NSArray *)allExpenseTypes;
++ (instancetype)sharedStore;
+- (NSArray *)allExpenseTypes;
+- (ETExpenseType *)createExpenseType:(NSString *)name;
+- (BOOL)saveChanges;
 
 @end

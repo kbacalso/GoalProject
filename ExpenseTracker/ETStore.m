@@ -26,9 +26,29 @@
 
 #pragma mark - Public
 
-+ (NSArray *)allExpenseTypes
+- (NSArray *)allExpenseTypes
 {
-    return [[[self sharedStore] expenseTypes] copy];
+    return [self.expenseTypes copy];
+}
+
+- (ETExpenseType *)createExpenseType:(NSString *)name
+{
+    ETExpenseType* newType = [NSEntityDescription insertNewObjectForEntityForName:@"ETExpenseType"
+                                                           inManagedObjectContext:_context];
+    newType.name = name;
+    [self.expenseTypes addObject:newType];
+    return newType;
+}
+
+- (BOOL)saveChanges
+{
+    NSError *error = nil;
+    BOOL successful = [self.context save:&error];
+    if ( !successful ) {
+        NSLog( @"Error saving: %@", [error localizedDescription] );
+    }
+    
+    return successful;
 }
 
 #pragma mark - Object Life Cycle

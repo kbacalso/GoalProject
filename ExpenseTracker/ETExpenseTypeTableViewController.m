@@ -11,7 +11,7 @@
 
 static NSString* const cellIdentifier = @"ExpenseTypeCell";
 
-@interface ETExpenseTypeTableViewController ()
+@interface ETExpenseTypeTableViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray* expenseTypes;
 
@@ -23,7 +23,13 @@ static NSString* const cellIdentifier = @"ExpenseTypeCell";
 
 - (IBAction)addNewItem:(id)sender
 {
-    NSLog( @"ADD!" );
+    UIAlertView* addAlertView = [[UIAlertView alloc] initWithTitle:@"New Category"
+                                                           message:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                                 otherButtonTitles:@"Add",nil];
+    addAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [addAlertView show];
 }
 
 
@@ -31,7 +37,7 @@ static NSString* const cellIdentifier = @"ExpenseTypeCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.expenseTypes = [[ETStore allExpenseTypes] mutableCopy];
+    self.expenseTypes = [[[ETStore sharedStore] allExpenseTypes] mutableCopy];
 }
 
 - (void)viewDidLoad
@@ -71,5 +77,20 @@ static NSString* const cellIdentifier = @"ExpenseTypeCell";
 //        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //    }   
 //}
+
+
+#pragma mark - Alert View Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSString* newTypeName = [[alertView textFieldAtIndex:0] text];
+        ETExpenseType* newType = [[ETStore sharedStore] createExpenseType:newTypeName];
+        [self.expenseTypes addObject:newType];
+        NSIndexPath* newRowIndexPath = [NSIndexPath indexPathForRow:([self.expenseTypes count] - 1) inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[newRowIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    NSLog(@"The (%d)%@ button was tapped.", buttonIndex, [alertView buttonTitleAtIndex:buttonIndex]);
+}
 
 @end
