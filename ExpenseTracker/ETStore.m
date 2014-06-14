@@ -24,6 +24,13 @@
 
 @implementation ETStore
 
+#pragma mark - Public
+
++ (NSArray *)allExpenseTypes
+{
+    return [[[self sharedStore] expenseTypes] copy];
+}
+
 #pragma mark - Object Life Cycle
 
 + (instancetype)sharedStore

@@ -1,15 +1,13 @@
 //
-//  ETExpenseStore.h
+//  ETExpenseTypeTableViewController.h
 //  ExpenseTracker
 //
 //  Created by Taki Bacalso on 6/14/14.
 //  Copyright (c) 2014 KlabCyscorpions. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface ETStore : NSObject
-
-+ (NSArray *)allExpenseTypes;
+@interface ETExpenseTypeTableViewController : UITableViewController
 
 @end

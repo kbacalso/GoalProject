@@ -10,6 +10,7 @@
 		6085C71F194C13E300F6E6C2 /* ETExpenseType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C71E194C13E300F6E6C2 /* ETExpenseType.m */; };
 		6085C722194C13E400F6E6C2 /* ETExpenseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C721194C13E400F6E6C2 /* ETExpenseItem.m */; };
 		6085C725194C194B00F6E6C2 /* NSManagedObjectContext+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C724194C194B00F6E6C2 /* NSManagedObjectContext+Util.m */; };
+		6085C72A194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C729194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m */; };
 		60BE957F194BF59D0005E1D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60BE957E194BF59D0005E1D8 /* CoreData.framework */; };
 		60D288B6194BD9E300A8A300 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D288B5194BD9E300A8A300 /* Foundation.framework */; };
 		60D288B8194BD9E300A8A300 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D288B7194BD9E300A8A300 /* CoreGraphics.framework */; };
@@ -46,6 +47,8 @@
 		6085C721194C13E400F6E6C2 /* ETExpenseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseItem.m; sourceTree = "<group>"; };
 		6085C723194C194B00F6E6C2 /* NSManagedObjectContext+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Util.h"; sourceTree = "<group>"; };
 		6085C724194C194B00F6E6C2 /* NSManagedObjectContext+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Util.m"; sourceTree = "<group>"; };
+		6085C728194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseTypeTableViewController.h; sourceTree = "<group>"; };
+		6085C729194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseTypeTableViewController.m; sourceTree = "<group>"; };
 		60BE957E194BF59D0005E1D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		60D288B2194BD9E300A8A300 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D288B5194BD9E300A8A300 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +99,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6085C726194C2F7C00F6E6C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6085C728194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.h */,
+				6085C729194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6085C727194C2F8900F6E6C2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				60D288F6194BED2000A8A300 /* ETStore.h */,
+				60D288F7194BED2000A8A300 /* ETStore.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		60D288A9194BD9E300A8A300 = {
 			isa = PBXGroup;
 			children = (
@@ -130,10 +151,10 @@
 		60D288BB194BD9E300A8A300 /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
-				60D288F6194BED2000A8A300 /* ETStore.h */,
-				60D288F7194BED2000A8A300 /* ETStore.m */,
+				6085C727194C2F8900F6E6C2 /* Controllers */,
 				60D28903194BEE3F00A8A300 /* Util */,
 				60D28902194BEDD200A8A300 /* Model */,
+				6085C726194C2F7C00F6E6C2 /* ViewControllers */,
 				60D288C4194BD9E300A8A300 /* AppDelegate.h */,
 				60D288C5194BD9E300A8A300 /* AppDelegate.m */,
 				60D288C7194BD9E300A8A300 /* Main.storyboard */,
@@ -294,6 +315,7 @@
 			files = (
 				6085C722194C13E400F6E6C2 /* ETExpenseItem.m in Sources */,
 				6085C71F194C13E300F6E6C2 /* ETExpenseType.m in Sources */,
+				6085C72A194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m in Sources */,
 				60D288F8194BED2000A8A300 /* ETStore.m in Sources */,
 				6085C725194C194B00F6E6C2 /* NSManagedObjectContext+Util.m in Sources */,
 				60D288C6194BD9E300A8A300 /* AppDelegate.m in Sources */,
