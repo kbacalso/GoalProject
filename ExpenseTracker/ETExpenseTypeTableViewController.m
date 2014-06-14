@@ -9,13 +9,14 @@
 #import "ETExpenseTypeTableViewController.h"
 #import "ETExpenseType.h"
 #import "UIAlertView+Util.h"
+#import "UITableView+Util.h"
 
 static NSString* const cellIdentifier = @"ExpenseTypeCell";
 
-enum ETExpenseTypeAlertView {
+typedef enum {
     ETExpenseTypeAlertViewAdd,
     ETExpenseTypeAlertViewEdit,
-};
+}ETExpenseTypeAlertViewType;
 
 @interface ETExpenseTypeTableViewController () <UIAlertViewDelegate>
 
@@ -102,23 +103,38 @@ enum ETExpenseTypeAlertView {
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString* newTypeName = [[alertView textFieldAtIndex:0] text];
-    if (alertView.tag == ETExpenseTypeAlertViewAdd) {
-        if (buttonIndex == 1) {
-            ETExpenseType* newType = [[ETStore sharedStore] createExpenseType:newTypeName];
-            [self.expenseTypes addObject:newType];
-            NSIndexPath* newRowIndexPath = [NSIndexPath indexPathForRow:([self.expenseTypes count] - 1) inSection:0];
-            [self.tableView insertRowsAtIndexPaths:@[newRowIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
+    if (buttonIndex == 1) {
+        UITextField* textField = [alertView textFieldAtIndex:0];
+        [self handleAlertViewText:textField.text type:alertView.tag];
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)handleAlertViewText:(NSString *)text type:(ETExpenseTypeAlertViewType)type
+{
+    if (type == ETExpenseTypeAlertViewAdd) {
+        [self addNewType:text];
+        [self.tableView addRow:[self.expenseTypes count]];
         return;
     }
     
-    if (buttonIndex == 1) {
-        NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
-        ETExpenseType* newType = self.expenseTypes[selectedIndexPath.row];
-        newType.name = newTypeName;
-        [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
+    [self editSelectedType:text];
+    [self.tableView reloadSelectedRow];
 }
+
+- (void)addNewType:(NSString *)newTypeName
+{
+    ETExpenseType* newType = [[ETStore sharedStore] createExpenseType:newTypeName];
+    [self.expenseTypes addObject:newType];
+}
+
+- (void)editSelectedType:(NSString *)newName
+{
+    NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    ETExpenseType* expenseType = self.expenseTypes[selectedIndexPath.row];
+    expenseType.name = newName;
+}
+
 
 @end
