@@ -52,5 +52,4 @@
     return [NSString stringWithFormat:@"name: %@\rdateSpent: %@\ramount: %.2f\rtype:\r   %@", self.name, self.dateSpent, [self.amount floatValue], self.type];
 }
 
-
 @end

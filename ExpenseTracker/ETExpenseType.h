@@ -14,9 +14,19 @@
 @interface ETExpenseType : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) ETExpenseItem *expenseItem;
+@property (nonatomic, retain) NSSet *expenseItem;
 
-+ (NSArray *)defaultExpenseTypes;
++ (NSArray *)loadDefaultExpenseTypes:(NSManagedObjectContext *)context;
++ (NSArray *)expenseTypes:(NSManagedObjectContext *)context;
 + (instancetype)randomType:(NSManagedObjectContext *)context;
+
+@end
+
+@interface ETExpenseType (CoreDataGeneratedAccessors)
+
+- (void)addExpenseItemObject:(ETExpenseItem *)value;
+- (void)removeExpenseItemObject:(ETExpenseItem *)value;
+- (void)addExpenseItem:(NSSet *)values;
+- (void)removeExpenseItem:(NSSet *)values;
 
 @end

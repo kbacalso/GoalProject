@@ -15,4 +15,5 @@
     #import <Foundation/Foundation.h>
     #import "NSDate+Util.h"
     #import "ETStore.h"
+    #import "NSManagedObjectContext+Util.h"
 #endif

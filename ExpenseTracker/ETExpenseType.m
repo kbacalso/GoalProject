@@ -15,27 +15,40 @@
 @dynamic name;
 @dynamic expenseItem;
 
-+ (NSArray *)defaultExpenseTypes
++ (NSArray *)loadDefaultExpenseTypes:(NSManagedObjectContext *)context
 {
-    return @[ @"Transpo",
-              @"Snacks",
-              @"Eating Out",
-              @"Services",
-              @"Toiletries",
-              @"Medicine",
-              @"Gifts",
-              @"Leisure",
-              @"Clothes",
-              @"Bills",
-              ];
+    NSArray* defaultTypes = @[ @"Transpo",
+                               @"Snacks",
+                               @"Eating Out",
+                               @"Services",
+                               @"Toiletries",
+                               @"Medicine",
+                               @"Gifts",
+                               @"Leisure",
+                               @"Clothes",
+                               @"Bills",
+                               ];
+ 
+    NSMutableArray* types = [[NSMutableArray alloc] initWithCapacity:[defaultTypes count]];
+    for (NSString* typeName in defaultTypes) {
+        ETExpenseType* type = [NSEntityDescription insertNewObjectForEntityForName:@"ETExpenseType" inManagedObjectContext:context];
+        type.name = typeName;
+        [types addObject:type];
+    }
+    
+    return [NSArray arrayWithArray:types];
+}
+
++ (NSArray *)expenseTypes:(NSManagedObjectContext *)context
+{
+    NSSortDescriptor* sortDescriptors = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    return [context executeFetchRequest:@"ETExpenseType" sortDescriptors:@[sortDescriptors]];
 }
 
 + (instancetype)randomType:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ETExpenseType" inManagedObjectContext:context];
-    ETExpenseType *type = [[ETExpenseType alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    type.name = [self defaultExpenseTypes][arc4random() % [[self defaultExpenseTypes] count]];
-    return type;
+    NSArray* expenseTypes = [self expenseTypes:context];
+    return expenseTypes[arc4random() % [expenseTypes count]];
 }
 
 - (NSString *)description

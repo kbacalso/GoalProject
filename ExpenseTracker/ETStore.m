@@ -10,6 +10,7 @@
 
 #import "ETStore.h"
 #import "ETExpenseItem.h"
+#import "ETExpenseType.h"
 
 
 @interface ETStore ()
@@ -17,7 +18,7 @@
 @property (nonatomic, strong) NSManagedObjectContext*   context;
 @property (nonatomic, strong) NSManagedObjectModel*     model;
 @property (nonatomic, strong) NSMutableArray*           expenses;
-
+@property (nonatomic, strong) NSMutableArray*           expenseTypes;
 
 @end
 
@@ -43,6 +44,7 @@
     
     if ( self ) {
         [self establishStoreConnection];
+        [self loadExpenseTypes];
         [self loadExpenses];
     }
     
@@ -72,24 +74,13 @@
     NSLog( @"Store Connection Established..." );
 }
 
+
 - (void)loadExpenses
 {
     if (self.expenses == nil) {
-        NSEntityDescription* entity = [NSEntityDescription entityForName:@"ETExpenseItem" inManagedObjectContext:_context];
         NSSortDescriptor* sortDescriptors = [NSSortDescriptor sortDescriptorWithKey:@"dateSpent" ascending:NO];
-        
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        request.entity = entity;
-        request.sortDescriptors = @[sortDescriptors];
-        
-        NSError* error = nil;
-        NSArray* fetchResult = [_context executeFetchRequest:request error:&error];
-        if (fetchResult == nil) {
-            [NSException raise:@"Fetct failed" format:@"Reason: %@", error.localizedDescription];
-        }
-        
+        NSArray* fetchResult = [_context executeFetchRequest:@"ETExpenseItem" sortDescriptors:@[sortDescriptors]];
         self.expenses = [NSMutableArray arrayWithArray:fetchResult];
-        
         if ([self.expenses count] == 0) {
             self.expenses = [NSMutableArray arrayWithArray:[self randomExpenses]];
         }
@@ -97,7 +88,19 @@
     NSLog( @"%d Expenses Loaded...", [self.expenses count] );
 }
 
+- (void)loadExpenseTypes
+{
+    if (self.expenseTypes == nil) {
+        self.expenseTypes = [[ETExpenseType expenseTypes:_context] mutableCopy];
+        if ([self.expenseTypes count] == 0) {
+            self.expenseTypes = [[ETExpenseType loadDefaultExpenseTypes:_context] mutableCopy];
+        }
+    }
+    NSLog( @"%d Expense Types Loaded...", [self.expenseTypes count] );
+}
+
 #pragma mark - Helper Methods
+
 
 - (NSString*)itemArchivePath
 {
