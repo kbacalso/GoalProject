@@ -7,13 +7,15 @@
 //
 
 #import "ETExpenseItem.h"
+#import "ETExpenseType.h"
 
 
 @implementation ETExpenseItem
 
+@dynamic amount;
 @dynamic dateSpent;
 @dynamic name;
-@dynamic amount;
+@dynamic type;
 
 + (NSString *)randomExpenseName
 {
@@ -40,13 +42,14 @@
     item.dateSpent = [NSDate randomDate];
     item.name = [self randomExpenseName];
     item.amount = [NSNumber numberWithInt:arc4random() % 1000 + 1];
+    item.type = [ETExpenseType randomType:context];
     
     return item;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"name: %@\rdateSpent: %@\ramount: %.2f", self.name, self.dateSpent, [self.amount floatValue]];
+    return [NSString stringWithFormat:@"name: %@\rdateSpent: %@\ramount: %.2f\rtype:\r   %@", self.name, self.dateSpent, [self.amount floatValue], self.type];
 }
 
 

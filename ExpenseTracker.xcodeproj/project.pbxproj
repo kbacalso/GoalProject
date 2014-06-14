@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6085C719194C099200F6E6C2 /* ETExpenseType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C718194C099200F6E6C2 /* ETExpenseType.m */; };
+		6085C71C194C099200F6E6C2 /* ETExpenseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C71B194C099200F6E6C2 /* ETExpenseItem.m */; };
 		60BE957F194BF59D0005E1D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60BE957E194BF59D0005E1D8 /* CoreData.framework */; };
 		60D288B6194BD9E300A8A300 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D288B5194BD9E300A8A300 /* Foundation.framework */; };
 		60D288B8194BD9E300A8A300 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D288B7194BD9E300A8A300 /* CoreGraphics.framework */; };
@@ -24,7 +26,6 @@
 		60D288EC194BDA1B00A8A300 /* ExpenseTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60D288EA194BDA1B00A8A300 /* ExpenseTracker.xcdatamodeld */; };
 		60D288F2194BDD3F00A8A300 /* NSDate+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D288F1194BDD3F00A8A300 /* NSDate+Util.m */; };
 		60D288F8194BED2000A8A300 /* ETStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D288F7194BED2000A8A300 /* ETStore.m */; };
-		60D28901194BEDCA00A8A300 /* ETExpenseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D28900194BEDCA00A8A300 /* ETExpenseItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6085C717194C099200F6E6C2 /* ETExpenseType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseType.h; sourceTree = "<group>"; };
+		6085C718194C099200F6E6C2 /* ETExpenseType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseType.m; sourceTree = "<group>"; };
+		6085C71A194C099200F6E6C2 /* ETExpenseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseItem.h; sourceTree = "<group>"; };
+		6085C71B194C099200F6E6C2 /* ETExpenseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseItem.m; sourceTree = "<group>"; };
 		60BE957E194BF59D0005E1D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		60D288B2194BD9E300A8A300 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D288B5194BD9E300A8A300 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,8 +66,6 @@
 		60D288F1194BDD3F00A8A300 /* NSDate+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Util.m"; sourceTree = "<group>"; };
 		60D288F6194BED2000A8A300 /* ETStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETStore.h; sourceTree = "<group>"; };
 		60D288F7194BED2000A8A300 /* ETStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETStore.m; sourceTree = "<group>"; };
-		60D288FF194BEDCA00A8A300 /* ETExpenseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseItem.h; sourceTree = "<group>"; };
-		60D28900194BEDCA00A8A300 /* ETExpenseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,8 +173,10 @@
 			isa = PBXGroup;
 			children = (
 				60D288EA194BDA1B00A8A300 /* ExpenseTracker.xcdatamodeld */,
-				60D288FF194BEDCA00A8A300 /* ETExpenseItem.h */,
-				60D28900194BEDCA00A8A300 /* ETExpenseItem.m */,
+				6085C71A194C099200F6E6C2 /* ETExpenseItem.h */,
+				6085C71B194C099200F6E6C2 /* ETExpenseItem.m */,
+				6085C717194C099200F6E6C2 /* ETExpenseType.h */,
+				6085C718194C099200F6E6C2 /* ETExpenseType.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -282,7 +287,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60D28901194BEDCA00A8A300 /* ETExpenseItem.m in Sources */,
+				6085C71C194C099200F6E6C2 /* ETExpenseItem.m in Sources */,
+				6085C719194C099200F6E6C2 /* ETExpenseType.m in Sources */,
 				60D288F8194BED2000A8A300 /* ETStore.m in Sources */,
 				60D288C6194BD9E300A8A300 /* AppDelegate.m in Sources */,
 				60D288F2194BDD3F00A8A300 /* NSDate+Util.m in Sources */,
