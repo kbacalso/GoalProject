@@ -26,6 +26,11 @@
 
 #pragma mark - Public
 
+- (NSArray *)allExpenses
+{
+    return [self.expenses copy];
+}
+
 - (NSArray *)allExpenseTypes
 {
     return [self.expenseTypes copy];

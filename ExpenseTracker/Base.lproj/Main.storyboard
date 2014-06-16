@@ -16,7 +16,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Sgl-U3-9xD" kind="relationship" relationship="viewControllers" id="OiT-Gk-vyb"/>
-                        <segue destination="Blc-PE-4ta" kind="relationship" relationship="viewControllers" id="qcV-af-szv"/>
+                        <segue destination="G5i-P2-GXy" kind="relationship" relationship="viewControllers" id="qcV-af-szv"/>
                         <segue destination="r1O-kf-1rt" kind="relationship" relationship="viewControllers" id="eHD-eZ-dIV"/>
                     </connections>
                 </tabBarController>
@@ -42,25 +42,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTi-K5-UJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1269" y="-686"/>
-        </scene>
-        <!--View Controller - Expenses-->
-        <scene sceneID="DCO-tY-WUM">
-            <objects>
-                <viewController id="Blc-PE-4ta" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rVY-WI-Xos"/>
-                        <viewControllerLayoutGuide type="bottom" id="qel-MY-NJQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ua1-gN-9H9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Expenses" id="2ni-3t-Whb"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Uw-Lb-xX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1269" y="-16"/>
         </scene>
         <!--Expense Type Table View Controller - Categories-->
         <scene sceneID="bu5-yo-3ek">
@@ -115,6 +96,90 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gi1-CA-7mQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1269" y="660"/>
+        </scene>
+        <!--Navigation Controller - Expenses-->
+        <scene sceneID="Nls-bo-cFk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G5i-P2-GXy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Expenses" id="2ni-3t-Whb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Jp-3Q-65U">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BU7-4c-o4g" kind="relationship" relationship="rootViewController" id="Tm1-YB-4gM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7ep-zI-CFo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1269" y="-16"/>
+        </scene>
+        <!--Expenses Table View Controller-->
+        <scene sceneID="Zun-Q4-4qw">
+            <objects>
+                <tableViewController id="BU7-4c-o4g" customClass="ETExpensesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="77" sectionHeaderHeight="22" sectionFooterHeight="22" id="zx8-zG-fSx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseCell" rowHeight="77" id="MVp-xA-Wor" customClass="ETExpenseTableViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="77"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVp-xA-Wor" id="Rbf-2W-Jof">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-dF-QNt">
+                                            <rect key="frame" x="20" y="13" width="184" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60q-Fd-Cr7">
+                                            <rect key="frame" x="20" y="42" width="184" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zc-ZO-J9h">
+                                            <rect key="frame" x="212" y="27" width="88" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="expenseAmountLabel" destination="8zc-ZO-J9h" id="D95-w7-Gz6"/>
+                                    <outlet property="expenseNameLabel" destination="9gG-dF-QNt" id="lHq-NN-7Qg"/>
+                                    <outlet property="expenseTypeLabel" destination="60q-Fd-Cr7" id="aoJ-S7-tte"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BU7-4c-o4g" id="6bb-8w-0nt"/>
+                            <outlet property="delegate" destination="BU7-4c-o4g" id="uz0-mn-HoC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="0yf-Pp-9D1">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="bAb-A2-yU0">
+                            <rect key="frame" x="8" y="7" width="304" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Day"/>
+                                <segment title="Week"/>
+                                <segment title="Month"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q2N-IM-SaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1795" y="-16"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

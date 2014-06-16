@@ -13,9 +13,13 @@
 @interface ETStore : NSObject
 
 + (instancetype)sharedStore;
+
+- (BOOL)saveChanges;
+
 - (NSArray *)allExpenseTypes;
 - (ETExpenseType *)createExpenseType:(NSString *)name;
 - (BOOL)deleteExpenseType:(ETExpenseType *)expenseType;
-- (BOOL)saveChanges;
+
+- (NSArray *)allExpenses;
 
 @end
