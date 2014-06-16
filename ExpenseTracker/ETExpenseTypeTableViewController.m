@@ -76,14 +76,13 @@ typedef enum {
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//    }   
-//}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self deleteSelectedType:indexPath];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 
 
 #pragma mark - Table View Delegate
@@ -134,6 +133,13 @@ typedef enum {
     NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
     ETExpenseType* expenseType = self.expenseTypes[selectedIndexPath.row];
     expenseType.name = newName;
+}
+
+- (void)deleteSelectedType:(NSIndexPath *)index
+{
+    ETExpenseType* expenseType = self.expenseTypes[index.row];
+    [self.expenseTypes removeObjectIdenticalTo:expenseType];
+    [[ETStore sharedStore] deleteExpenseType:expenseType];
 }
 
 

@@ -40,6 +40,12 @@
     return newType;
 }
 
+- (void)deleteExpenseType:(ETExpenseType *)expenseType
+{
+    [self.context deleteObject:expenseType];
+    [self.expenseTypes removeObjectIdenticalTo:expenseType];
+}
+
 - (BOOL)saveChanges
 {
     NSError *error = nil;

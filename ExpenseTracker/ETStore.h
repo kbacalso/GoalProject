@@ -15,6 +15,7 @@
 + (instancetype)sharedStore;
 - (NSArray *)allExpenseTypes;
 - (ETExpenseType *)createExpenseType:(NSString *)name;
+- (void)deleteExpenseType:(ETExpenseType *)expenseType;
 - (BOOL)saveChanges;
 
 @end
