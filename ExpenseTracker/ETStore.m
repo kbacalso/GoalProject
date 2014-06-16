@@ -40,10 +40,30 @@
     return newType;
 }
 
-- (void)deleteExpenseType:(ETExpenseType *)expenseType
+- (BOOL)deleteExpenseType:(ETExpenseType *)expenseType
 {
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"ETExpenseItem" inManagedObjectContext:_context];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == %@", expenseType];
+    
+    NSFetchRequest* countRequest = [[NSFetchRequest alloc] init];
+    countRequest.entity = entity;
+    countRequest.predicate = predicate;
+    
+    NSError* error = nil;
+    NSInteger count = [self.context countForFetchRequest:countRequest error:&error];
+    if (count > 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[NSString stringWithFormat:@"Category '%@' is being used.", expenseType.name]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return NO;
+    }
+    
     [self.context deleteObject:expenseType];
     [self.expenseTypes removeObjectIdenticalTo:expenseType];
+    return YES;
 }
 
 - (BOOL)saveChanges

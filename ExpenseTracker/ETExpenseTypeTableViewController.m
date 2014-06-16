@@ -80,7 +80,6 @@ typedef enum {
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self deleteSelectedType:indexPath];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -138,9 +137,14 @@ typedef enum {
 - (void)deleteSelectedType:(NSIndexPath *)index
 {
     ETExpenseType* expenseType = self.expenseTypes[index.row];
-    [self.expenseTypes removeObjectIdenticalTo:expenseType];
-    [[ETStore sharedStore] deleteExpenseType:expenseType];
+    BOOL isDeleteSuccessful = [[ETStore sharedStore] deleteExpenseType:expenseType];
+    
+    if ( isDeleteSuccessful == YES ) {
+        [self.expenseTypes removeObjectIdenticalTo:expenseType];
+        [self.tableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+        return;
+    }
+    [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
 }
-
 
 @end
