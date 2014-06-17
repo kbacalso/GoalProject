@@ -175,6 +175,12 @@
     for (int i = 0; i < max; i++) {
         [expenses addObject:[ETExpenseItem randomExpense:_context]];
     }
+    [expenses sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        ETExpenseItem* item1 = (ETExpenseItem *)obj1;
+        ETExpenseItem* item2 = (ETExpenseItem *)obj2;
+        
+        return -[item1.dateSpent compare:item2.dateSpent];
+    }];
     
     return [NSArray arrayWithArray:expenses];
 }

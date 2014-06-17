@@ -72,7 +72,7 @@ enum ETMonths {
     [formatter setDateFormat:@"yyyy-MM-dd"];
  
     NSInteger year = 2014;
-    NSInteger month = [self randomMonth];
+    NSInteger month = 6;
     NSInteger day = [self randomDay:month year:year];
     
     return [formatter dateFromString:[NSString stringWithFormat:@"%d-%d-%d", year, month, day]];
