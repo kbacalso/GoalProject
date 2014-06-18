@@ -69,13 +69,20 @@ enum ETMonths {
 + (NSDate *)randomDate
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy-M-d"];
  
     NSInteger year = 2014;
     NSInteger month = 6;
     NSInteger day = [self randomDay:month year:year];
     
     return [formatter dateFromString:[NSString stringWithFormat:@"%d-%d-%d", year, month, day]];
+}
+
+- (NSString*)stringWithFormat:(NSString *)dateFormat
+{
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormat];
+    return [dateFormatter stringFromDate:self];
 }
 
 @end

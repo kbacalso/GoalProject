@@ -10,6 +10,7 @@
 #import "ETExpenseItem.h"
 #import "ETExpenseType.h"
 #import "ETExpenseTableViewCell.h"
+#import "NSDate+Util.h"
 
 typedef enum{
     ETExpenseSortTypeDay,
@@ -23,15 +24,33 @@ static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
 
 @property (nonatomic, retain) NSMutableArray* expenses;
 @property (nonatomic, retain) NSDictionary* filteredDictionary;
+@property (nonatomic, assign) ETExpenseSortType selectedSortType;
 
 @end
 
 @implementation ETExpensesTableViewController
 
+#pragma mark - IBActions
+- (IBAction)sortingTypeChanged:(UISegmentedControl *)sender
+{
+    self.selectedSortType = sender.selectedSegmentIndex;
+    self.filteredDictionary = [self filteredExpenses:self.selectedSortType];
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - View Life Cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.selectedSortType = ETExpenseSortTypeDay;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.expenses = [[[ETStore sharedStore] allExpenses] mutableCopy];
-    self.filteredDictionary = [self filteredExpenses:ETExpenseSortTypeDay];
+    self.filteredDictionary = [self filteredExpenses:self.selectedSortType];
 }
 
 #pragma mark - Table view data source
@@ -51,10 +70,18 @@ static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
     NSArray* sectionArray = (NSArray *)[self.filteredDictionary objectForKey:[NSNumber numberWithInteger:section]];
     ETExpenseItem* expenseItem = sectionArray.firstObject;
     
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    if ( self.selectedSortType == ETExpenseSortTypeWeek ) {
+        return [NSString stringWithFormat:@"%@ %@ Week %@",
+                [expenseItem.dateSpent stringWithFormat:@"YYYY"],
+                [expenseItem.dateSpent stringWithFormat:@"MMM"],
+                [expenseItem.dateSpent stringWithFormat:@"W"]];
+    }
     
-    return [dateFormatter stringFromDate:expenseItem.dateSpent];
+    if ( self.selectedSortType == ETExpenseSortTypeMonth ) {
+        return [expenseItem.dateSpent stringWithFormat:@"YYYY MMM"];
+    }
+    
+    return [expenseItem.dateSpent stringWithFormat:@"MMM dd, YYYY"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,17 +100,13 @@ static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
 
 #pragma mark - Private methods
 
-- (NSDictionary *)filteredExpenses:(ETExpenseSortType)sortType
+- (NSDictionary *)filterWithDateFormat:(NSString *)dateFormat
 {
     NSMutableDictionary* filteredDictionary = [NSMutableDictionary dictionary];
-    
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
     for( int section = 0, itemIndex = 0; itemIndex < [self.expenses count]; itemIndex++ ) {
         ETExpenseItem* item = self.expenses[itemIndex];
         NSNumber* currentSection = [NSNumber numberWithInt:section];
-        NSLog( @"Date: %@", [dateFormatter stringFromDate:item.dateSpent] );
         
         NSMutableArray* itemArray = [filteredDictionary objectForKey:currentSection];
         
@@ -96,8 +119,8 @@ static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
         }
         
         // If index path has array already, check if item belongs to array
-        NSString* currentSectionTitle = [dateFormatter stringFromDate:[(ETExpenseItem *)itemArray[0] dateSpent]];
-        NSString* itemDateString = [dateFormatter stringFromDate:item.dateSpent];
+        NSString* currentSectionTitle = [[(ETExpenseItem *)itemArray[0] dateSpent] stringWithFormat:dateFormat];
+        NSString* itemDateString = [item.dateSpent stringWithFormat:dateFormat];
         
         if ( [itemDateString isEqualToString:currentSectionTitle] == NO ) {
             currentSection = [NSNumber numberWithInt:++section];
@@ -110,7 +133,20 @@ static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
         [itemArray addObject:item];
     }
     
-    return filteredDictionary;
+    return [NSDictionary dictionaryWithDictionary:filteredDictionary];
+}
+
+- (NSDictionary *)filteredExpenses:(ETExpenseSortType)sortType
+{
+    
+    if ( sortType == ETExpenseSortTypeWeek ) {
+        return [self filterWithDateFormat:@"YYYY MMM W"];
+    }
+    
+    if ( sortType == ETExpenseSortTypeMonth ) {
+        return [self filterWithDateFormat:@"MMM"];
+    }
+    return [self filterWithDateFormat:@"YYYY-MM-dd"];
 }
 
 /*

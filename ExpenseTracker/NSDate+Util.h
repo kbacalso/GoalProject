@@ -14,5 +14,6 @@
 + (NSInteger)randomMonth;
 + (NSInteger)randomDay:(NSInteger)month year:(NSInteger)year;
 + (NSDate *)randomDate;
+- (NSString*)stringWithFormat:(NSString *)dateFormat;
 
 @end
