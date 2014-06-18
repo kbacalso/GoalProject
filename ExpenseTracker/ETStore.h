@@ -22,4 +22,6 @@
 
 - (NSArray *)allExpenses;
 
+- (NSArray *)getDayExpenses:(NSDate *)date;
+
 @end

@@ -24,11 +24,11 @@
             </objects>
             <point key="canvasLocation" x="679" y="-16"/>
         </scene>
-        <!--View Controller - Today-->
+        <!--Expense Today View Controller - Today-->
         <scene sceneID="4yO-NN-zN5">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTi-K5-UJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Sgl-U3-9xD" sceneMemberID="viewController">
+                <viewController id="Sgl-U3-9xD" customClass="ETExpenseTodayViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tcu-iN-dv3"/>
                         <viewControllerLayoutGuide type="bottom" id="HfQ-Jf-Sig"/>

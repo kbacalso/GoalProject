@@ -2,7 +2,7 @@
 //  ETExpenseItem.m
 //  ExpenseTracker
 //
-//  Created by Taki Bacalso on 6/14/14.
+//  Created by Taki Bacalso on 6/18/14.
 //  Copyright (c) 2014 KlabCyscorpions. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 @dynamic amount;
 @dynamic dateSpent;
 @dynamic name;
+@dynamic dayId;
 @dynamic type;
 
 + (NSString *)randomExpenseName
@@ -43,13 +44,15 @@
     item.name = [self randomExpenseName];
     item.amount = [NSNumber numberWithInt:arc4random() % 1000 + 1];
     item.type = [ETExpenseType randomType:context];
+    item.dayId = [item.dateSpent stringWithFormat:@"YYYYMMMd"];
     
     return item;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"name: %@\rdateSpent: %@\ramount: %.2f\rtype:\r   %@", self.name, self.dateSpent, [self.amount floatValue], self.type];
+    return [NSString stringWithFormat:@"name: %@\rdateSpent: %@\ramount: %.2f\rdayId: %@\rtype:\r   %@",
+            self.name, self.dateSpent, [self.amount floatValue], self.dayId, self.type];
 }
 
 @end

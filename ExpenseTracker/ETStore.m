@@ -82,6 +82,13 @@
     return successful;
 }
 
+- (NSArray *)getDayExpenses:(NSDate *)date
+{
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"dayId == %@", [date stringWithFormat:@"YYYYMMMd"]];
+    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateSpent" ascending:NO];
+    return [_context executeFetchRequest:@"ETExpenseItem" sortDescriptors:@[sortDescriptor] predicate:predicate];
+}
+
 #pragma mark - Object Life Cycle
 
 + (instancetype)sharedStore

@@ -11,5 +11,8 @@
 @interface NSManagedObjectContext (Util)
 
 - (NSArray *)executeFetchRequest:(NSString *)entityName sortDescriptors:(NSArray *)sortDescriptors;
+- (NSArray *)executeFetchRequest:(NSString *)entityName
+                 sortDescriptors:(NSArray *)sortDescriptors
+                       predicate:(NSPredicate *)predicate;
 
 @end

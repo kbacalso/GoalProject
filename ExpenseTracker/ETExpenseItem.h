@@ -2,7 +2,7 @@
 //  ETExpenseItem.h
 //  ExpenseTracker
 //
-//  Created by Taki Bacalso on 6/14/14.
+//  Created by Taki Bacalso on 6/18/14.
 //  Copyright (c) 2014 KlabCyscorpions. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSNumber * amount;
 @property (nonatomic, retain) NSDate * dateSpent;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * dayId;
 @property (nonatomic, retain) ETExpenseType *type;
 
 + (instancetype)randomExpense:(NSManagedObjectContext *)context;
