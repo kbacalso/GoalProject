@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *expenseTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expenseAmountLabel;
 
++ (NSString *)reuseIdentifier;
+
 @end

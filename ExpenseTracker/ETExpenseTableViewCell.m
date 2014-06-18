@@ -10,4 +10,11 @@
 
 @implementation ETExpenseTableViewCell
 
+static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
+
++ (NSString *)reuseIdentifier
+{
+    return kExpenseCellIdentifier;
+}
+
 @end

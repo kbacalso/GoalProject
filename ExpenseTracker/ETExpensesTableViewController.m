@@ -18,8 +18,6 @@ typedef enum{
     ETExpenseSortTypeMonth,
 }ETExpenseSortType;
 
-static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
-
 @interface ETExpensesTableViewController ()
 
 @property (nonatomic, retain) NSMutableArray* expenses;
@@ -89,7 +87,7 @@ static NSString* const kExpenseCellIdentifier = @"ExpenseCell";
     NSArray* sectionArray = (NSArray *)[self.filteredDictionary objectForKey:[NSNumber numberWithInteger:indexPath.section]];
     ETExpenseItem* expenseItem = sectionArray[indexPath.row];
     
-    ETExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kExpenseCellIdentifier forIndexPath:indexPath];
+    ETExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ETExpenseTableViewCell reuseIdentifier] forIndexPath:indexPath];
     cell.expenseNameLabel.text = expenseItem.name;
     cell.expenseTypeLabel.text = expenseItem.type.name;
     cell.expenseAmountLabel.text = [expenseItem.amount stringValue];
