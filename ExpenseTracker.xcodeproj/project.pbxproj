@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		603AEB8F1951B4BF0005E166 /* ETExpenseTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 603AEB8E1951B4BF0005E166 /* ETExpenseTodayViewController.m */; };
 		603AEB921951B6690005E166 /* ETExpenseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 603AEB911951B6690005E166 /* ETExpenseItem.m */; };
+		605B647C1952ED2F00589A86 /* ETExpenseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 605B647B1952ED2F00589A86 /* ETExpenseDetailViewController.m */; };
 		6085C71F194C13E300F6E6C2 /* ETExpenseType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C71E194C13E300F6E6C2 /* ETExpenseType.m */; };
 		6085C725194C194B00F6E6C2 /* NSManagedObjectContext+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C724194C194B00F6E6C2 /* NSManagedObjectContext+Util.m */; };
 		6085C72A194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6085C729194C2FB600F6E6C2 /* ETExpenseTypeTableViewController.m */; };
@@ -50,6 +51,8 @@
 		603AEB8E1951B4BF0005E166 /* ETExpenseTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseTodayViewController.m; sourceTree = "<group>"; };
 		603AEB901951B6690005E166 /* ETExpenseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseItem.h; sourceTree = "<group>"; };
 		603AEB911951B6690005E166 /* ETExpenseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseItem.m; sourceTree = "<group>"; };
+		605B647A1952ED2F00589A86 /* ETExpenseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseDetailViewController.h; sourceTree = "<group>"; };
+		605B647B1952ED2F00589A86 /* ETExpenseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseDetailViewController.m; sourceTree = "<group>"; };
 		6085C71D194C13E300F6E6C2 /* ETExpenseType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETExpenseType.h; sourceTree = "<group>"; };
 		6085C71E194C13E300F6E6C2 /* ETExpenseType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETExpenseType.m; sourceTree = "<group>"; };
 		6085C723194C194B00F6E6C2 /* NSManagedObjectContext+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Util.h"; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 				60B406A6194F111B00024DD9 /* ETExpensesTableViewController.m */,
 				603AEB8D1951B4BF0005E166 /* ETExpenseTodayViewController.h */,
 				603AEB8E1951B4BF0005E166 /* ETExpenseTodayViewController.m */,
+				605B647A1952ED2F00589A86 /* ETExpenseDetailViewController.h */,
+				605B647B1952ED2F00589A86 /* ETExpenseDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				60D288F8194BED2000A8A300 /* ETStore.m in Sources */,
 				60B406AB194F158D00024DD9 /* ETExpenseTableViewCell.m in Sources */,
 				6085C725194C194B00F6E6C2 /* NSManagedObjectContext+Util.m in Sources */,
+				605B647C1952ED2F00589A86 /* ETExpenseDetailViewController.m in Sources */,
 				60D288C6194BD9E300A8A300 /* AppDelegate.m in Sources */,
 				60D288F2194BDD3F00A8A300 /* NSDate+Util.m in Sources */,
 				60B406A7194F111B00024DD9 /* ETExpensesTableViewController.m in Sources */,

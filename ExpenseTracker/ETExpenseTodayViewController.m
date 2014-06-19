@@ -10,8 +10,9 @@
 #import "ETExpenseTableViewCell.h"
 #import "ETExpenseItem.h"
 #import "ETExpenseType.h"
+#import "ETExpenseDetailViewController.h"
 
-@interface ETExpenseTodayViewController () <UITableViewDataSource>
+@interface ETExpenseTodayViewController () <UITableViewDataSource, ETExpenseDetailViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel*   totalExpenseLabel;
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
@@ -56,6 +57,13 @@
 }
 
 
+#pragma mark - Expense Detail View Delegate
+
+- (void)dismissDetailViewController:(ETExpenseDetailViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:NO];
+}
+
 #pragma mark - Private Methods
 
 - (void)reloadData
@@ -66,5 +74,13 @@
     NSLog( @"sum: %@", self.totalExpenseLabel.text );
 }
 
+
+#pragma mark - Segue methods
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ETExpenseDetailViewController* detailViewController = (ETExpenseDetailViewController*)[(UINavigationController *)[segue destinationViewController] topViewController];
+    detailViewController.delegate = self;
+}
 
 @end
