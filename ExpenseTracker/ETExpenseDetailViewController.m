@@ -7,21 +7,83 @@
 //
 
 #import "ETExpenseDetailViewController.h"
+#import "ETExpenseItem.h"
+#import "ETExpenseType.h"
 
-@interface ETExpenseDetailViewController ()
+typedef enum {
+    ETExpenseTextFieldDate,
+    ETExpenseTextFieldName,
+    ETExpenseTextFieldAmount,
+    ETExpenseTextFieldCategory,
+}ETExpenseTextField;
+
+@interface ETExpenseDetailViewController () <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *amountTextField;
+@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
 
 @end
 
 @implementation ETExpenseDetailViewController
 
-- (IBAction)cancelAction:(id)sender
-{
-    NSLog( @"assa" );
-    [self.delegate dismissDetailViewController:self];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog( @"%@", self.delegate );
+    self.dateTextField.text = [self.item.dateSpent stringWithFormat:@"MMM d, YYYY"];
+    self.nameTextField.text = self.item.name;
+    self.amountTextField.text = [self.item.amount stringValue];
+    self.categoryTextField.text = self.item.type.name;
 }
+
+
+#pragma mark - Text Field Delegate methods
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    BOOL shouldReturn = (textField.text != nil);
+    if (shouldReturn) {
+        [self.view endEditing:YES];
+    }
+    return shouldReturn;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    BOOL shouldReturn = (textField.text != nil);
+    if (shouldReturn) {
+        [self.view endEditing:YES];
+    }
+    return shouldReturn;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    switch (textField.tag) {
+        case ETExpenseTextFieldDate:
+            self.item.dateSpent = [textField.text dateWithFormat:@"MMM d, YYYY"];
+            self.item.dayId = [self.item.dateSpent stringWithFormat:@"YYYYMMMd"];
+            break;
+            
+        case ETExpenseTextFieldName:
+            self.item.name = textField.text;
+            break;
+            
+        case ETExpenseTextFieldAmount:
+            self.item.amount = [NSNumber numberWithFloat:[textField.text floatValue]];
+            break;
+            
+        case ETExpenseTextFieldCategory:
+            self.item.type.name = textField.text;
+            break;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[ETStore sharedStore] saveChanges];
+}
+
+
+
 @end

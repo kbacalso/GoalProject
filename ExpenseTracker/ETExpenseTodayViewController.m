@@ -12,7 +12,7 @@
 #import "ETExpenseType.h"
 #import "ETExpenseDetailViewController.h"
 
-@interface ETExpenseTodayViewController () <UITableViewDataSource, ETExpenseDetailViewControllerDelegate>
+@interface ETExpenseTodayViewController () <UITableViewDataSource, UITableViewDelegate, ETExpenseDetailViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel*   totalExpenseLabel;
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
@@ -25,6 +25,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self reloadData];
 }
 
@@ -56,6 +60,8 @@
     return cell;
 }
 
+#pragma mark - Table View Delegate
+
 
 #pragma mark - Expense Detail View Delegate
 
@@ -70,6 +76,7 @@
 {
     self.currentExpenses = [[[ETStore sharedStore] getDayExpenses:[NSDate date]] mutableCopy];
     self.totalExpenseLabel.text = [[self.currentExpenses valueForKeyPath:@"@sum.amount"] stringValue];
+    [self.tableView reloadData];
     NSLog( @"current: %@", self.currentExpenses );
     NSLog( @"sum: %@", self.totalExpenseLabel.text );
 }
@@ -79,8 +86,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    ETExpenseDetailViewController* detailViewController = (ETExpenseDetailViewController*)[(UINavigationController *)[segue destinationViewController] topViewController];
-    detailViewController.delegate = self;
+    ETExpenseDetailViewController* detailViewController = [segue destinationViewController];
+    detailViewController.item = self.currentExpenses[self.tableView.indexPathForSelectedRow.row];
 }
 
 @end

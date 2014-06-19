@@ -15,7 +15,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Sgl-U3-9xD" kind="relationship" relationship="viewControllers" id="OiT-Gk-vyb"/>
+                        <segue destination="8Bf-Qj-pGP" kind="relationship" relationship="viewControllers" id="OiT-Gk-vyb"/>
                         <segue destination="G5i-P2-GXy" kind="relationship" relationship="viewControllers" id="qcV-af-szv"/>
                         <segue destination="r1O-kf-1rt" kind="relationship" relationship="viewControllers" id="eHD-eZ-dIV"/>
                     </connections>
@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="679" y="-16"/>
         </scene>
-        <!--Expense Today View Controller - Today-->
+        <!--Expense Today View Controller-->
         <scene sceneID="4yO-NN-zN5">
             <objects>
                 <viewController id="Sgl-U3-9xD" customClass="ETExpenseTodayViewController" sceneMemberID="viewController">
@@ -60,9 +60,6 @@
                                         <state key="normal" title="+ Expense">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="qEN-3L-3W9" kind="modal" identifier="AddExpense" id="dGf-NK-UBb"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </view>
@@ -71,11 +68,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseCell" rowHeight="74" id="dP1-OP-Gk7" customClass="ETExpenseTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseCell" rowHeight="74" id="dP1-OP-Gk7" customClass="ETExpenseTableViewCell">
                                         <rect key="frame" x="0.0" y="55" width="320" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dP1-OP-Gk7" id="LTN-iG-IVx">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCP-5P-8M5">
@@ -91,7 +88,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0O-Ex-9ai">
-                                                    <rect key="frame" x="212" y="26" width="88" height="21"/>
+                                                    <rect key="frame" x="179" y="26" width="88" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
@@ -102,6 +99,7 @@
                                             <outlet property="expenseAmountLabel" destination="b0O-Ex-9ai" id="r9u-Ty-GPy"/>
                                             <outlet property="expenseNameLabel" destination="CCP-5P-8M5" id="gMR-rA-kBZ"/>
                                             <outlet property="expenseTypeLabel" destination="IZV-tW-8ES" id="upJ-pd-Vv9"/>
+                                            <segue destination="Ofu-DF-zKh" kind="push" identifier="EditExpense" id="Qnz-gs-NK0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -114,7 +112,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Today" id="4Ux-bs-Jbz"/>
+                    <navigationItem key="navigationItem" id="Jyh-ms-0zL"/>
                     <connections>
                         <outlet property="tableView" destination="H0W-vb-7vM" id="gBD-m4-AAS"/>
                         <outlet property="totalExpenseLabel" destination="i2c-jn-wfP" id="gnH-XO-4fa"/>
@@ -122,9 +120,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTi-K5-UJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1269" y="-686"/>
+            <point key="canvasLocation" x="1795" y="-686"/>
         </scene>
-        <!--Expense Detail View Controller - + Expense-->
+        <!--Expense Detail View Controller - Edit Expense-->
         <scene sceneID="oWU-3w-ege">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mo3-bf-9uw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,40 +167,51 @@
                                 <rect key="frame" x="111" y="99" width="189" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ofu-DF-zKh" id="YGs-aN-J0J"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uKh-SI-kLS">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uKh-SI-kLS">
                                 <rect key="frame" x="111" y="137" width="189" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ofu-DF-zKh" id="fWa-FM-0qO"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ip2-Od-1Rq">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ip2-Od-1Rq">
                                 <rect key="frame" x="111" y="178" width="189" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ofu-DF-zKh" id="0Qv-pq-8Yz"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2PX-2x-EFv">
+                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2PX-2x-EFv">
                                 <rect key="frame" x="111" y="222" width="189" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ofu-DF-zKh" id="fAM-gR-byP"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="+ Expense" id="iJK-5r-rjE">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="80w-6M-MfL">
-                            <connections>
-                                <action selector="cancelAction:" destination="Ofu-DF-zKh" id="aQ2-vC-MHC"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="O9i-4A-rLR"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Edit Expense" id="iJK-5r-rjE"/>
+                    <connections>
+                        <outlet property="amountTextField" destination="Ip2-Od-1Rq" id="ek9-4E-31r"/>
+                        <outlet property="categoryTextField" destination="2PX-2x-EFv" id="zKx-tF-M9l"/>
+                        <outlet property="dateTextField" destination="6Wu-5R-PFF" id="gAK-dU-iUt"/>
+                        <outlet property="nameTextField" destination="uKh-SI-kLS" id="kt7-Ar-3L9"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2333" y="-686"/>
+            <point key="canvasLocation" x="2294" y="-686"/>
         </scene>
         <!--Expense Type Table View Controller - Categories-->
         <scene sceneID="bu5-yo-3ek">
@@ -286,11 +295,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseCell" rowHeight="74" id="MVp-xA-Wor" customClass="ETExpenseTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseCell" rowHeight="74" id="MVp-xA-Wor" customClass="ETExpenseTableViewCell">
                                 <rect key="frame" x="0.0" y="119" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVp-xA-Wor" id="Rbf-2W-Jof">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-dF-QNt">
@@ -306,7 +315,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zc-ZO-J9h">
-                                            <rect key="frame" x="212" y="26" width="88" height="21"/>
+                                            <rect key="frame" x="179" y="26" width="88" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <nil key="highlightedColor"/>
@@ -317,6 +326,7 @@
                                     <outlet property="expenseAmountLabel" destination="8zc-ZO-J9h" id="D95-w7-Gz6"/>
                                     <outlet property="expenseNameLabel" destination="9gG-dF-QNt" id="lHq-NN-7Qg"/>
                                     <outlet property="expenseTypeLabel" destination="60q-Fd-Cr7" id="aoJ-S7-tte"/>
+                                    <segue destination="Ofu-DF-zKh" kind="push" id="ZAf-qZ-Eua"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -345,23 +355,24 @@
             </objects>
             <point key="canvasLocation" x="1807" y="-16"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Mes-27-rj8">
+        <!--Navigation Controller - Today-->
+        <scene sceneID="k0b-kL-Qqw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qEN-3L-3W9" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Bf-Qj-pGP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Today" id="4Ux-bs-Jbz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6KQ-tX-7kv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kGK-xj-fuL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Ofu-DF-zKh" kind="relationship" relationship="rootViewController" id="h4B-6q-maq"/>
+                        <segue destination="Sgl-U3-9xD" kind="relationship" relationship="rootViewController" id="iKQ-4R-4NF"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bgn-m7-PVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ck-JO-DdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807" y="-686"/>
+            <point key="canvasLocation" x="1269" y="-686"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -369,4 +380,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZAf-qZ-Eua"/>
+    </inferredMetricsTieBreakers>
 </document>
