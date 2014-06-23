@@ -70,16 +70,16 @@ typedef enum{
     
     if ( self.selectedSortType == ETExpenseSortTypeWeek ) {
         return [NSString stringWithFormat:@"%@ %@ Week %@",
-                [expenseItem.dateSpent stringWithFormat:@"YYYY"],
+                [expenseItem.dateSpent stringWithFormat:@"yyyy"],
                 [expenseItem.dateSpent stringWithFormat:@"MMM"],
                 [expenseItem.dateSpent stringWithFormat:@"W"]];
     }
     
     if ( self.selectedSortType == ETExpenseSortTypeMonth ) {
-        return [expenseItem.dateSpent stringWithFormat:@"YYYY MMM"];
+        return [expenseItem.dateSpent stringWithFormat:@"yyyy MMM"];
     }
     
-    return [expenseItem.dateSpent stringWithFormat:@"MMM dd, YYYY"];
+    return [expenseItem.dateSpent stringWithFormat:@"MMM dd, yyyy"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,13 +145,13 @@ typedef enum{
 {
     
     if ( sortType == ETExpenseSortTypeWeek ) {
-        return [self filterWithDateFormat:@"YYYY MMM W"];
+        return [self filterWithDateFormat:@"yyyy MMM W"];
     }
     
     if ( sortType == ETExpenseSortTypeMonth ) {
         return [self filterWithDateFormat:@"MMM"];
     }
-    return [self filterWithDateFormat:@"YYYY-MM-dd"];
+    return [self filterWithDateFormat:@"yyyy-MM-dd"];
 }
 
 #pragma mark - Segue methods

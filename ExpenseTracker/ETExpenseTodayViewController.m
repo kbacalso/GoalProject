@@ -36,7 +36,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[NSDate date] stringWithFormat:@"MMM dd, YYYY"];
+    return [[NSDate date] stringWithFormat:@"MMM dd, yyyy"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -14,6 +14,7 @@
 {
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = format;
+    dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
     return [dateFormatter dateFromString:self];
 }
 

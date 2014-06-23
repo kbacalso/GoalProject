@@ -30,7 +30,7 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.dateTextField.text = [self.item.dateSpent stringWithFormat:@"MMM d, YYYY"];
+    self.dateTextField.text = [self.item.dateSpent stringWithFormat:@"MMM d, yyyy"];
     self.nameTextField.text = self.item.name;
     self.amountTextField.text = [self.item.amount stringValue];
     self.categoryTextField.text = self.item.type.name;
@@ -61,8 +61,8 @@ typedef enum {
 {
     switch (textField.tag) {
         case ETExpenseTextFieldDate:
-            self.item.dateSpent = [textField.text dateWithFormat:@"MMM d, YYYY"];
-            self.item.dayId = [self.item.dateSpent stringWithFormat:@"YYYYMMMd"];
+            self.item.dateSpent = [textField.text dateWithFormat:@"MMM d, yyyy"];
+            self.item.dayId = [self.item.dateSpent stringWithFormat:@"yyyyMMMd"];
             break;
             
         case ETExpenseTextFieldName:
