@@ -7,6 +7,7 @@
 //
 
 #import "ETExpensesTableViewController.h"
+#import "ETExpenseDetailViewController.h"
 #import "ETExpenseItem.h"
 #import "ETExpenseType.h"
 #import "ETExpenseTableViewCell.h"
@@ -47,8 +48,7 @@ typedef enum{
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.expenses = [[[ETStore sharedStore] allExpenses] mutableCopy];
-    self.filteredDictionary = [self filteredExpenses:self.selectedSortType];
+    [self reloadData];
 }
 
 #pragma mark - Table view data source
@@ -98,6 +98,13 @@ typedef enum{
 
 #pragma mark - Private methods
 
+- (void)reloadData
+{
+    self.expenses = [[[ETStore sharedStore] allExpenses] mutableCopy];
+    self.filteredDictionary = [self filteredExpenses:self.selectedSortType];
+    [self.tableView reloadData];
+}
+
 - (NSDictionary *)filterWithDateFormat:(NSString *)dateFormat
 {
     NSMutableDictionary* filteredDictionary = [NSMutableDictionary dictionary];
@@ -146,5 +153,18 @@ typedef enum{
     }
     return [self filterWithDateFormat:@"YYYY-MM-dd"];
 }
+
+#pragma mark - Segue methods
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath* selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    NSArray* sectionArray = (NSArray *)[self.filteredDictionary objectForKey:[NSNumber numberWithInteger:selectedIndexPath.section]];
+    ETExpenseItem* expenseItem = sectionArray[selectedIndexPath.row];
+    
+    ETExpenseDetailViewController* detailViewController = [segue destinationViewController];
+    detailViewController.item = expenseItem;
+}
+
 
 @end
