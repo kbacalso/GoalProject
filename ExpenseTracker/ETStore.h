@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class ETExpenseType;
+@class ETExpenseItem;
 
 @interface ETStore : NSObject
 
@@ -21,7 +22,7 @@
 - (BOOL)deleteExpenseType:(ETExpenseType *)expenseType;
 
 - (NSArray *)allExpenses;
-
 - (NSArray *)getDayExpenses:(NSDate *)date;
+- (ETExpenseItem *)createExpenseItem;
 
 @end

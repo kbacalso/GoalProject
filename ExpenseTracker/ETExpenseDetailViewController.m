@@ -19,21 +19,45 @@ typedef enum {
 
 @interface ETExpenseDetailViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *amountTextField;
-@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
+@property (strong, nonatomic) UIBarButtonItem *cancelButton;
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
 
 @end
 
 @implementation ETExpenseDetailViewController
 
+- (void)viewDidLoad
+{
+    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                     style:UIBarButtonItemStyleBordered
+                                                                    target:self
+                                                                    action:@selector(cancelAction:)];
+    self.cancelButton = cancelButton;
+    
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(doneAction:)];
+    self.doneButton = doneButton;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.dateTextField.text = [self.item.dateSpent stringWithFormat:@"MMM d, yyyy"];
-    self.nameTextField.text = self.item.name;
-    self.amountTextField.text = [self.item.amount stringValue];
-    self.categoryTextField.text = self.item.type.name;
+    NSString* dateFormat = @"MMMM d, yyyy";
+    
+    if ( self.item ) {
+        self.dateTextField.text = [self.item.dateSpent stringWithFormat:dateFormat];
+        self.nameTextField.text = self.item.name;
+        self.amountTextField.text = [self.item.amount stringValue];
+        self.categoryTextField.text = self.item.type.name;
+        [self shouldShowBarButtons:NO];
+    } else {
+        self.dateTextField.text = [[NSDate date] stringWithFormat:dateFormat];
+        self.nameTextField.placeholder = @"e.g. Starbucks Coffee";
+        self.amountTextField.placeholder = @"e.g. 150";
+        self.categoryTextField.placeholder = @"Eating Out";
+        [self shouldShowBarButtons:YES];
+    }
 }
 
 
@@ -81,9 +105,60 @@ typedef enum {
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[ETStore sharedStore] saveChanges];
+    [self willDismiss];
 }
 
+#pragma mark - Private Methods
 
+- (void)shouldShowBarButtons:(BOOL)show
+{
+    if (show) {
+        self.navigationItem.leftBarButtonItem = self.cancelButton;
+        self.navigationItem.rightBarButtonItem = self.doneButton;
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem =nil;
+    }
+}
+
+- (void)cancelAction:(id)sender
+{
+    [self didCancel];
+    [self dismiss];
+}
+
+- (void)doneAction:(id)sender
+{
+    [self didFinish];
+    [self dismiss];
+}
+
+- (void)willDismiss
+{
+    if ( [self.delegate respondsToSelector:@selector(willDismissDetailViewController:)] ) {
+        [self.delegate willDismissDetailViewController:self];
+    }
+}
+
+- (void)didCancel
+{
+    if ( [self.delegate respondsToSelector:@selector(didCancelDetailViewController:)] ) {
+        [self.delegate didCancelDetailViewController:self];
+    }
+}
+
+- (void)didFinish
+{
+    if ( [self.delegate respondsToSelector:@selector(didFinishDetailViewController:)] ) {
+        [self.delegate didFinishDetailViewController:self];
+    }
+}
+
+- (void)dismiss
+{
+    if ( [self.delegate respondsToSelector:@selector(dismissDetailViewController:)] ) {
+        [self.delegate dismissDetailViewController:self];
+    }
+}
 
 @end

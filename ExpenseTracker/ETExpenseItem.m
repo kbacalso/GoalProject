@@ -18,6 +18,14 @@
 @dynamic dayId;
 @dynamic type;
 
+- (void)setDateSpent:(NSDate *)dateSpent
+{
+    [self willChangeValueForKey:@"dateSpent"];
+    [self setPrimitiveValue:dateSpent forKey:@"dateSpent"];
+    self.dayId = [dateSpent stringWithFormat:@"YYYYMMMd"];
+    [self didChangeValueForKey:@"dateSpend"];
+}
+
 + (NSString *)randomExpenseName
 {
     NSArray *randomExpenseNameList = @[ @"Brownies",
@@ -44,7 +52,6 @@
     item.name = [self randomExpenseName];
     item.amount = [NSNumber numberWithInt:arc4random() % 1000 + 1];
     item.type = [ETExpenseType randomType:context];
-    item.dayId = [item.dateSpent stringWithFormat:@"YYYYMMMd"];
     
     return item;
 }

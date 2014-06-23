@@ -38,6 +38,12 @@
 
 - (ETExpenseType *)createExpenseType:(NSString *)name
 {
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    NSArray* result = [_context executeFetchRequest:@"ETExpenseType" sortDescriptors:nil predicate:predicate];
+    if ( result.count > 0 ) {
+        return result.firstObject;
+    }
+    
     ETExpenseType* newType = [NSEntityDescription insertNewObjectForEntityForName:@"ETExpenseType"
                                                            inManagedObjectContext:_context];
     newType.name = name;
@@ -80,6 +86,14 @@
     }
     
     return successful;
+}
+
+- (ETExpenseItem *)createExpenseItem
+{
+    ETExpenseItem* newItem = [NSEntityDescription insertNewObjectForEntityForName:@"ETExpenseItem"
+                                                           inManagedObjectContext:_context];
+    [self.expenses addObject:newItem];
+    return newItem;
 }
 
 - (NSArray *)getDayExpenses:(NSDate *)date

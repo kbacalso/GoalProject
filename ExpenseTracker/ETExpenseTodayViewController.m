@@ -65,10 +65,27 @@
 
 #pragma mark - Expense Detail View Delegate
 
+- (void)didFinishDetailViewController:(ETExpenseDetailViewController *)viewController
+{
+    ETExpenseItem* newItem = [[ETStore sharedStore] createExpenseItem];
+    newItem.amount = [NSNumber numberWithInteger:[viewController.amountTextField.text integerValue]];
+    newItem.dateSpent = [viewController.dateTextField.text dateWithFormat:@"MMM d, yyyy"];
+    newItem.name = viewController.nameTextField.text;
+    ETExpenseType* type = [[ETStore sharedStore] createExpenseType:viewController.categoryTextField.text];
+    newItem.type = type;
+    [self reloadData];
+}
+
 - (void)dismissDetailViewController:(ETExpenseDetailViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:NO];
 }
+
+- (void)willDismissDetailViewController:(ETExpenseDetailViewController *)viewController
+{
+    [[ETStore sharedStore] saveChanges];
+}
+
 
 #pragma mark - Private Methods
 
@@ -86,8 +103,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    ETExpenseDetailViewController* detailViewController = [segue destinationViewController];
-    detailViewController.item = self.currentExpenses[self.tableView.indexPathForSelectedRow.row];
+    ETExpenseDetailViewController* detailViewController = nil;
+    if ( [segue.identifier isEqualToString:@"AddItem"] ) {
+        detailViewController = (ETExpenseDetailViewController *)[(UINavigationController *)segue.destinationViewController topViewController];
+        detailViewController.delegate = self;
+    } else {
+        detailViewController = [segue destinationViewController];
+        detailViewController.item = self.currentExpenses[self.tableView.indexPathForSelectedRow.row];
+    }
 }
 
 @end

@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ao-zS-T3l">
-                                <rect key="frame" x="0.0" y="20" width="320" height="85"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="85"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Expense:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l72-30-dLs">
@@ -60,11 +60,14 @@
                                         <state key="normal" title="+ Expense">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="m0k-8g-iRd" kind="modal" identifier="AddItem" id="R1U-3m-44N"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="79" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-vb-7vM">
-                                <rect key="frame" x="0.0" y="113" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="157" width="320" height="411"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -99,7 +102,7 @@
                                             <outlet property="expenseAmountLabel" destination="b0O-Ex-9ai" id="r9u-Ty-GPy"/>
                                             <outlet property="expenseNameLabel" destination="CCP-5P-8M5" id="gMR-rA-kBZ"/>
                                             <outlet property="expenseTypeLabel" destination="IZV-tW-8ES" id="upJ-pd-Vv9"/>
-                                            <segue destination="Ofu-DF-zKh" kind="push" identifier="EditExpense" id="Qnz-gs-NK0"/>
+                                            <segue destination="Ofu-DF-zKh" kind="push" id="BlN-Ah-Vnj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -125,7 +128,6 @@
         <!--Expense Detail View Controller - Edit Expense-->
         <scene sceneID="oWU-3w-ege">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mo3-bf-9uw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Ofu-DF-zKh" customClass="ETExpenseDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SgU-nv-FV2"/>
@@ -210,8 +212,9 @@
                         <outlet property="nameTextField" destination="uKh-SI-kLS" id="kt7-Ar-3L9"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mo3-bf-9uw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2294" y="-686"/>
+            <point key="canvasLocation" x="2850" y="-355"/>
         </scene>
         <!--Expense Type Table View Controller - Categories-->
         <scene sceneID="bu5-yo-3ek">
@@ -326,7 +329,7 @@
                                     <outlet property="expenseAmountLabel" destination="8zc-ZO-J9h" id="D95-w7-Gz6"/>
                                     <outlet property="expenseNameLabel" destination="9gG-dF-QNt" id="lHq-NN-7Qg"/>
                                     <outlet property="expenseTypeLabel" destination="60q-Fd-Cr7" id="aoJ-S7-tte"/>
-                                    <segue destination="Ofu-DF-zKh" kind="push" id="ZAf-qZ-Eua"/>
+                                    <segue destination="Ofu-DF-zKh" kind="push" id="Nix-xg-sE0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -374,6 +377,25 @@
             </objects>
             <point key="canvasLocation" x="1269" y="-686"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yjC-Wt-au6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m0k-8g-iRd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="VHj-dt-1AE"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JNr-Yg-UBR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ofu-DF-zKh" kind="relationship" relationship="rootViewController" id="1xh-gn-k0Y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zrH-y6-KIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2331" y="-1037"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -381,6 +403,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZAf-qZ-Eua"/>
+        <segue reference="BlN-Ah-Vnj"/>
     </inferredMetricsTieBreakers>
 </document>
