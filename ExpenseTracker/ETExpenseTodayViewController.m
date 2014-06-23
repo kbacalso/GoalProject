@@ -83,6 +83,9 @@
 
 - (void)willDismissDetailViewController:(ETExpenseDetailViewController *)viewController
 {
+    ETExpenseItem* item = viewController.item;
+    ETExpenseType* type = [[ETStore sharedStore] createExpenseType:viewController.categoryTextField.text];
+    item.type = type;
     [[ETStore sharedStore] saveChanges];
 }
 

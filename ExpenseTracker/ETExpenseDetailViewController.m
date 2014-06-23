@@ -86,7 +86,6 @@ typedef enum {
     switch (textField.tag) {
         case ETExpenseTextFieldDate:
             self.item.dateSpent = [textField.text dateWithFormat:@"MMM d, yyyy"];
-            self.item.dayId = [self.item.dateSpent stringWithFormat:@"yyyyMMMd"];
             break;
             
         case ETExpenseTextFieldName:
@@ -97,8 +96,10 @@ typedef enum {
             self.item.amount = [NSNumber numberWithFloat:[textField.text floatValue]];
             break;
             
-        case ETExpenseTextFieldCategory:
-            self.item.type.name = textField.text;
+        case ETExpenseTextFieldCategory: {
+            ETExpenseType* type = [[ETStore sharedStore] createExpenseType:textField.text];
+            self.item.type = type;
+        }
             break;
     }
 }

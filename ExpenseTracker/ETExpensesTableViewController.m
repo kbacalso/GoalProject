@@ -19,7 +19,7 @@ typedef enum{
     ETExpenseSortTypeMonth,
 }ETExpenseSortType;
 
-@interface ETExpensesTableViewController ()
+@interface ETExpensesTableViewController () <ETExpenseDetailViewControllerDelegate>
 
 @property (nonatomic, retain) NSMutableArray* expenses;
 @property (nonatomic, retain) NSDictionary* filteredDictionary;
@@ -154,6 +154,18 @@ typedef enum{
     return [self filterWithDateFormat:@"yyyy-MM-dd"];
 }
 
+
+#pragma mark - Detail View Controller Delagate
+
+- (void)willDismissDetailViewController:(ETExpenseDetailViewController *)viewController
+{
+    ETExpenseItem* item = viewController.item;
+    ETExpenseType* type = [[ETStore sharedStore] createExpenseType:viewController.categoryTextField.text];
+    item.type = type;
+    [[ETStore sharedStore] saveChanges];
+}
+
+
 #pragma mark - Segue methods
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -164,6 +176,7 @@ typedef enum{
     
     ETExpenseDetailViewController* detailViewController = [segue destinationViewController];
     detailViewController.item = expenseItem;
+    detailViewController.delegate = self;
 }
 
 
